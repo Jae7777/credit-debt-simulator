@@ -18,7 +18,7 @@ import { useEffect, useState } from "react"
 import KidForm from "./KidForm"
 
 const formSchema = z.object({
-  numKids: z.coerce.number().int().nonnegative(),
+  numKids: z.coerce.number().int().nonnegative().min(1).max(5),
   monthlyIncome: z.coerce.number().int().nonnegative(),
   monthlyExpense: z.coerce.number().int().nonnegative(),
 })
@@ -28,7 +28,7 @@ const InputForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      numKids: 0,
+      numKids: 1,
       monthlyIncome: 0,
       monthlyExpense: 0,
     }
